@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Producto;
 use Illuminate\Database\Seeder;
+
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        /* `Storage::makeDirectory('productos');` está creando un nuevo directorio llamado 'productos'
+        en el directorio de almacenamiento de la aplicación. Normalmente se utiliza para crear un
+        directorio para almacenar archivos u otros recursos relacionados con la aplicación. */
+        Storage::makeDirectory('productos');
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(ProductoSeeder::class);
+        // Producto::factory(50)->create();
     }
 }

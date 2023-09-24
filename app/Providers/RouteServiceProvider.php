@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    // ! EN ESTA CONSTANTE REDIRIGE DESPUES DE LOGUEARSE
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -35,6 +36,13 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            /* El código `Route::middleware('web')->group(base_path('routes/admin.php'));` define un
+            grupo de rutas a las que se puede acceder a través del middleware web. */
+            // ! AQUI ECLARAMOS QUE EL ARCHIVO admin.php DE LA CARPETA ROUTE FUNCIONE PARA AGREGAR RUTAS
+            Route::middleware(['web', 'auth'])
+                ->prefix('admin')
+                ->group(base_path('routes/admin.php'));
         });
     }
 }

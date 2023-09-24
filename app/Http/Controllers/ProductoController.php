@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class ProductoController extends Controller
 {
@@ -11,7 +12,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::where('marca', 'asus')->paginate(10);
+        return view('productos.index', compact('productos'));
     }
 
     /**
@@ -33,9 +35,9 @@ class ProductoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Producto $producto)
     {
-        //
+        return view('productos.show', compact('producto'));
     }
 
     /**
