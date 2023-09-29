@@ -1,4 +1,25 @@
-<x-app-layout>
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Almacen</h1>
+@stop
+
+@section('content')
+    <p>Bienvenido al panel administrativo de Santa Clara.</p>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script>
+        console.log('Hi!');
+    </script>
+@stop
+{{-- <x-app-layout>
     <div class="container py-8">
         <div class="grid grid-cols-2 justify-items-center gap-4">
             @foreach ($almacenes as $almacen)
@@ -26,4 +47,4 @@
             @endforeach
         </div>
     </div>
-</x-app-layout>
+</x-app-layout> --}}

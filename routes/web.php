@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductoController;
 Route::controller(ProductoController::class)->group(function () {
     Route::get('/', 'index')->name('productos.index');
     Route::get('productos/{producto}', 'show')->name('productos.show');
+    // Route::get()
 });
 
 /* El bloque de código define un grupo de rutas que está protegido por middleware. El middleware
