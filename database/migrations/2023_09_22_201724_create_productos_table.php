@@ -18,12 +18,12 @@ class CreateProductosTable extends Migration
             $table->string('codigo', 15);
             $table->double('precioventa', 11, 2);
             $table->string('nombre', 100);
-            $table->string('descripcion');
             $table->string('marca', 80);
             $table->string('modelo', 80);
             $table->string('tamaño', 15);
-            $table->string('color', 80);
-            $table->integer('stock');
+            // $table->string('color', 80);
+            $table->integer('stock')->nullable();
+            $table->string('descripcion')->nullable();
         });
     }
 

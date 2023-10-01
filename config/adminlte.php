@@ -351,10 +351,10 @@ return [
             'text' => 'Comercial',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
-                [
-                    'text' => 'Productos',
-                    'route' => 'admin.productos.index',
-                ],
+                // [
+                //     'text' => 'Productos',
+                //     'route' => 'admin.productos.index',
+                // ],
                 [
                     'text' => 'Pedidos',
                     'url' => '#',
@@ -369,6 +369,10 @@ return [
             'text' => 'Logistica',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
+                [
+                    'text' => 'Productos',
+                    'route' => 'admin.productos.index',
+                ],
                 [
                     'text' => 'Ingreso',
                     'url' => '#',

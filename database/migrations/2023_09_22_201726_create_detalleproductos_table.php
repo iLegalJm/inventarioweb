@@ -23,7 +23,8 @@ class CreateDetalleproductosTable extends Migration
             $table->double('valor_vta_sigv', 11, 2)->nullable();
             $table->double('valor_vta_igv', 11, 2)->nullable();
             $table->double('dscto', 11, 2)->nullable();
-            
+            $table->integer('status')->nullable()->default(1);
+
             $table->foreign('almacen_id', 'fk_detalleproductos_almacenes1')->references('id')->on('almacenes');
             $table->foreign('producto_id', 'fk_detalleproductos_productos1')->references('id')->on('productos');
         });

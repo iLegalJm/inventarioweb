@@ -16,5 +16,9 @@ class AlmacenSeeder extends Seeder
         Almacen::create([
             'nombre' => 'Lima Centro'
         ]);
+
+        Almacen::create([
+            'nombre' => 'Santa Clara'
+        ]);
     }
 }

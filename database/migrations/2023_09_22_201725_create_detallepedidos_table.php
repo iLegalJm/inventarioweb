@@ -20,7 +20,6 @@ class CreateDetallepedidosTable extends Migration
             $table->integer('cantidad');
             $table->string('precio', 45);
             $table->double('valor_vta', 11, 2);
-            
             $table->foreign('ordenpedido_id', 'fk_detallepedido_ordenpedido1')->references('codigo')->on('ordenpedidos');
             $table->foreign('producto_id', 'fk_detallepedido_productos1')->references('id')->on('productos');
         });

@@ -9,7 +9,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['codigo', 'precioventa', 'nombre', 'descripcion', 'marca', 'modelo', 'tamaño', 'color', 'stock'];
+    protected $fillable = ['codigo', 'precioventa', 'nombre', 'descripcion', 'marca', 'modelo', 'tamaño', 'stock'];
 
     /* La línea `public  = false;` deshabilita la funcionalidad de marca de tiempo
     automática en el modelo Eloquent. De forma predeterminada, Eloquent espera que las columnas

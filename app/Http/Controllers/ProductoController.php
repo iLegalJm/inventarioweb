@@ -12,7 +12,16 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::where('marca', 'asus')->paginate(10);
+        // $productos = Producto::where('marca', 'asus')->paginate(10);
+        $productos = Producto::all();
+        // foreach ($productos as $producto) {
+        //     if () {
+        //         echo $producto->productofoto;
+        //         echo "<br>";
+        //     }
+
+        // }
+
         return view('productos.index', compact('productos'));
     }
 

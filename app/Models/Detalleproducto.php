@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Detalleproducto extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     public function almacen()
     {
         return $this->belongsTo(Almacen::class);

@@ -26,7 +26,7 @@ class ProductoFactory extends Factory
             'marca' => $this->faker->randomElement(['asus', 'asd']),
             'modelo' => $this->faker->randomElement(['bxccxcc', 'wwewewe']),
             'tamaño' => $this->faker->randomElement(['42x25', '25x25']),
-            'color' => $this->faker->safeColorName(),
+            // 'color' => $this->faker->safeColorName(),
             'stock' => rand(3, 5),
 
         ];
