@@ -18,4 +18,10 @@ class Ordenventa extends Model
     {
         return $this->belongsTo(Ordenpedido::class);
     }
+
+    //!RELACION DE MUCHOS A MUCHOS
+    public function ordeningresosalida()
+    {
+        return $this->belongsToMany(Ordeningresosalida::class);
+    }
 }

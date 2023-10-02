@@ -14,7 +14,7 @@ class CreateOrdenventasTable extends Migration
     public function up()
     {
         Schema::create('ordenventas', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('codigo', 50)->nullable();
             $table->timestamp('fecha')->nullable()->useCurrent();
             $table->date('fechapago')->nullable();
@@ -28,7 +28,7 @@ class CreateOrdenventasTable extends Migration
             $table->double('importepago', 11, 2)->nullable();
             $table->double('importevuelto', 11, 2)->nullable();
             $table->string('ordenpedido_id', 12);
-            
+
             $table->foreign('ordenpedido_id', 'fk_ordenventas_ordenpedidos1')->references('codigo')->on('ordenpedidos');
         });
     }

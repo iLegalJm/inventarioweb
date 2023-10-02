@@ -9,6 +9,11 @@ class Producto extends Model
 {
     use HasFactory;
 
+    public function getRouteKeyName()
+    {
+        return "nombre";
+    }
+
     protected $fillable = ['codigo', 'precioventa', 'nombre', 'descripcion', 'marca', 'modelo', 'tamaño', 'stock'];
 
     /* La línea `public  = false;` deshabilita la funcionalidad de marca de tiempo
@@ -30,5 +35,10 @@ class Producto extends Model
     public function productofoto()
     {
         return $this->hasMany(Productofoto::class);
+    }
+
+    public function detalleingresosalida()
+    {
+        return $this->hasMany(Detalleingresosalida::class);
     }
 }

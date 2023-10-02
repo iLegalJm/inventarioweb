@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdensalidasTable extends Migration
+class CreateOrdeningresosalidasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateOrdensalidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ordensalidas', function (Blueprint $table) {
-            $table->integer('id')->primary();
+        Schema::create('ordeningresosalidas', function (Blueprint $table) {
+            $table->id();
             $table->string('codigo', 16)->nullable();
-            $table->date('fechaorden')->nullable();
+            $table->date('fechaorden')->default('CURRENT_TIMESTAMP')->nullable();
             $table->integer('idestado')->nullable();
             $table->string('descripcion')->nullable();
-            $table->unsignedInteger('ordenventa_id');
-            
-            $table->foreign('ordenventa_id', 'fk_ordeningresosalida_ordenventas1')->references('id')->on('ordenventas');
+            // $table->unsignedInteger('ordenventa_id');
+
+            // $table->foreign('ordenventa_id', 'fk_ordeningresosalida_ordenventas1')->references('id')->on('ordenventas');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateOrdensalidasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordensalidas');
+        Schema::dropIfExists('ordeningresosalidas');
     }
 }

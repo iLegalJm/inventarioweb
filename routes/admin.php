@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AlmacenController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OrdeningresoController;
 use App\Http\Controllers\Admin\ProductoController as AdminProductoController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,4 +14,5 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::resource('almacenes', AlmacenController::class)->names('admin.almacenes');
 Route::resource('productos', AdminProductoController::class)->names('admin.productos');
+Route::resource('ingresos', OrdeningresoController::class)->names('admin.ingresos');
 ?>
