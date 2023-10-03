@@ -335,7 +335,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Usuarios',
-                    'url' => '#',
+                    'route' => 'admin.users.index',
                 ],
                 [
                     'text' => 'Roles',

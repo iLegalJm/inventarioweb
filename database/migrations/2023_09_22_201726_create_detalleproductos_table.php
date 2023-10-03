@@ -14,7 +14,7 @@ class CreateDetalleproductosTable extends Migration
     public function up()
     {
         Schema::create('detalleproductos', function (Blueprint $table) {
-            $table->integer('id')->primary()->autoIncrement();
+            $table->id();
             $table->unsignedBigInteger('producto_id');
             $table->unsignedBigInteger('almacen_id');
             $table->integer('cantidad')->nullable();
