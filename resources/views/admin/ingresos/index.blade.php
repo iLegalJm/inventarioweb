@@ -43,20 +43,9 @@
                             <td style="">
                                 <a href="{{ route('admin.ingresos.edit', $ingreso) }}" class="btn btn-primary btn-sm"><i
                                         class="fa fa-solid fa-edit"></i></a>
-                                <a href="{{ route('admin.ingresos.show', $ingreso) }}" class="btn btn-warning btn-sm"><i
-                                        class="fa fa-solid fa-eye"></i></a>
-                                <!-- Button trigger modal -->
-                                @php
-                                    $productos = null;
-                                @endphp
-                                <button id="btnmodal" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                <button id="btnmodal" type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                     data-target="#exampleModal" data-datos="{{ $ingreso->detalleingresosalida }}"
-                                    @foreach ($ingreso->detalleingresosalida as $detalle)
-                                    @php
-                                        $productos = new stdClass();
-                                        $productos = $detalle->producto->nombre;
-                                    @endphp @endforeach
-                                    data-dnombres={{$productos}}>Launch</button>
+                                    @foreach ($ingreso->detalleingresosalida as $key => $detalle) data-produ{{ $key }}="{{ $detalle->producto }}" @endforeach><i class="fa fa-solid fa-eye"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -70,15 +59,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles del ingreso</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table>
-                        <thead>
-                            <tr></tr>
+                    <table id="detalles-ingreso" class="table table-hover table-striped table-sm cursor-default">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
                         </thead>
                         <tbody>
 
@@ -87,7 +80,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -423,10 +415,20 @@
             $('#ingresos').DataTable(dataTableOptions);
         });
         $(document).on('click', '#btnmodal', function() {
-            let da = $(this).data('datos');
-            let de = $(this).data('dnombres');
-            console.log(da);
-            console.log(de);
+            const tablaModal = $('#detalles-ingreso > tbody');
+            let detalles = $(this).data('datos');
+            tablaModal.empty();
+            for (let index = 0; index < detalles.length; index++) {
+                let dprodu = $(this).data('produ' + index);
+                console.log(dprodu['nombre']);
+                let fila = `<tr class="selected">
+                        <td>${dprodu['nombre']}</td>
+                        <td>${detalles[index]['cantidad']}</td>
+                        <td>${detalles[index]['costo']}</td>
+                    </tr>`;
+
+                tablaModal.append(fila);
+            }
         });
     </script>
 @stop

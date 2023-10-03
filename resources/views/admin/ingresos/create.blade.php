@@ -20,9 +20,16 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
                 </div>
-                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                     {!! Form::label('idestado', 'Estado:', ['class' => '']) !!}
                     {!! Form::select('idestado', $idestados, null, ['class' => 'form-control']) !!}
+                    @error('nombre')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                    {!! Form::label('almacen_id', 'Almacen:', ['class' => '']) !!}
+                    {!! Form::select('almacen_id', $almacenes, null, ['class' => 'form-control']) !!}
                     @error('nombre')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

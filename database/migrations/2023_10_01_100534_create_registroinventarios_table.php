@@ -12,9 +12,10 @@ return new class extends Migration {
     {
         Schema::create('registroinventarios', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fechamovimiento');
+            $table->integer('idmovimientoiventario');
+            $table->timestamp('fechamovimiento')->nullable()->useCurrent();
             $table->integer('cantidad');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->unsignedBigInteger('detalleingresosalida_id');
             $table->unsignedBigInteger('almacen_id');
 

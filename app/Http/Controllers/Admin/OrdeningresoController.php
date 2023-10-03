@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IngresoRequest;
+use App\Models\Almacen;
 use App\Models\Detalleingresosalida;
+use App\Models\Detalleproducto;
+use App\Models\Inventarioalmacen;
 use App\Models\Ordeningresosalida;
 use App\Models\Producto;
+use App\Models\Registroinventario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,22 +21,15 @@ class OrdeningresoController extends Controller
      */
     public function index()
     {
-        $ingresos = Ordeningresosalida::all();
-        // $ingresos = Ordeningresosalida::all();
-        // $this->e
+        $ingresos = Ordeningresosalida::all()->where('idmovimientoiventario', 1);
         return view('admin.ingresos.index', compact('ingresos'));
-        // foreach ($ingresos as $ingreso) {
-        // echo $ingreso->detalleingresosalida;
-
-        # code...
-// }
-        //     foreach ($ingreso->detalleingresosalida as $in) {
-        //         echo $in->producto;
-        //         echo "<br>";
-        //     }
-        //     echo "<br>";
+        // $producto = Detalleproducto::all()->where('almacen_id', 2)->where('producto_id', 1)->first();
+        // if (empty($producto)) {
+        //     $productoCantidad = 0;
+        // } else {
+        //     $productoCantidad = ($producto->cantidad != 0) ? $producto->cantidad : 0;
         // }
-        // return $ingresos[0]->producto;
+        // var_dump($productoCantidad);
     }
 
     /**
@@ -45,7 +42,8 @@ class OrdeningresoController extends Controller
             2 => 'Realizado'
         ];
         $productos = Producto::all()->where('stock', '>', 0)->pluck('nombre', 'id');
-        return view('admin.ingresos.create', compact('idestados', 'productos'));
+        $almacenes = Almacen::all()->pluck('nombre', 'id');
+        return view('admin.ingresos.create', compact('idestados', 'productos', 'almacenes'));
     }
 
     /**
@@ -53,16 +51,60 @@ class OrdeningresoController extends Controller
      */
     public function store(IngresoRequest $request)
     {
-        $ingreso = Ordeningresosalida::create($request->all());
+        $ingreso = Ordeningresosalida::create([
+            'idmovimientoiventario' => 1,
+            'codigo' => $request->codigo,
+            'idestado' => $request->idestado,
+        ]);
 
         $cont = 0;
 
         while ($cont < count($request->producto_id)) {
-            $ingreso->detalleingresosalida()->create([
+            $detalleIngreso = $ingreso->detalleingresosalida()->create([
                 'cantidad' => $request->cantidad[$cont],
                 'costo' => $request->costo[$cont],
                 'producto_id' => $request->producto_id[$cont]
             ]);
+
+            Registroinventario::create([
+                'idmovimientoiventario' => 1,
+                'cantidad' => $detalleIngreso->cantidad,
+                'descripcion' => $detalleIngreso->descripcion,
+                'detalleingresosalida_id' => $detalleIngreso->id,
+                'almacen_id' => $request->almacen_id
+            ]);
+
+            //! OBTENGO EL PRODUCTO A MODIFICAR EL STOCK, EN ESTE CASO LA TABLA DETALLE PRODUCTOS
+            $producto = Producto::find($request->producto_id[$cont])->detalleproducto->where('almacen_id', $request->almacen_id)->first();
+            /* La sentencia `if (empty()) {` comprueba si la variable `` está vacía o
+            no. Si está vacío, significa que no se encontró ningún registro coincidente en la base
+            de datos para las condiciones dadas. */
+            if (empty($producto)) {
+                //! COMO ESTA VACIO CREARE EL DETALLE DEL PRODUCTO
+                Detalleproducto::create([
+                    'producto_id' => $detalleIngreso->producto_id,
+                    'almacen_id' => $request->almacen_id,
+                    'cantidad' => 0,
+                    'precio_unit_sigv' => $detalleIngreso->costo,
+                    'precio_unit_igv' => ($detalleIngreso->costo * 0.18) + $detalleIngreso->costo,
+                    'valor_vta_sigv' => $detalleIngreso->costo,
+                    'valor_vta_igv' => ($detalleIngreso->costo * 0.18) + $detalleIngreso->costo,
+                    'dscto' => 0
+                ]);
+                $productoCantidad = 0;
+            } else {
+                $productoCantidad = ($producto->cantidad != 0) ? $producto->cantidad : 0;
+            }
+            Inventarioalmacen::create([
+                'cantidadinicial' => $productoCantidad,
+                'cantidadingreso' => $detalleIngreso->cantidad,
+                'cantidadsalida' => 0,
+                'stock' => ($productoCantidad + $detalleIngreso->cantidad),
+                'costo' => $detalleIngreso->costo,
+                'producto_id' => $detalleIngreso->producto_id,
+                'almacen_id' => $request->almacen_id
+            ]);
+
             $cont++;
         }
         return redirect()->route('admin.ingresos.index')->with('info', 'Se registro el ingreso correctamente');

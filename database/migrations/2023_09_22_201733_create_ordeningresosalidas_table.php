@@ -15,8 +15,9 @@ class CreateOrdeningresosalidasTable extends Migration
     {
         Schema::create('ordeningresosalidas', function (Blueprint $table) {
             $table->id();
+            $table->integer('idmovimientoiventario');
             $table->string('codigo', 16)->nullable();
-            $table->date('fechaorden')->default('CURRENT_TIMESTAMP')->nullable();
+            $table->timestamp('fechaorden')->nullable()->useCurrent();
             $table->integer('idestado')->nullable();
             $table->string('descripcion')->nullable();
             // $table->unsignedInteger('ordenventa_id');

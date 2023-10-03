@@ -10,7 +10,7 @@ class Ordeningresosalida extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['codigo', 'fechaorden', 'idestado', 'descripcion'];
+    protected $fillable = ['codigo', 'idmovimientoiventario', 'fechaorden', 'idestado', 'descripcion'];
     //!RELACION DE MUCHOS A MUCHOS
     public function ordenventa()
     {
