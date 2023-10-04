@@ -98,10 +98,10 @@
                             <!-- Active: "bg-gray-100", Not Active: "" -->
                             <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700"
                                 role="menuitem" tabindex="-1" id="user-menu-item-0">Tu perfil</a>
-                            {{-- @can('admin.home') --}}
+                            @can('admin.home')
                             <a href="{{ route('admin.home') }}" class="block px-4 py-2 text-sm text-gray-700"
                                 role="menuitem" tabindex="-1" id="user-menu-item-0">Dashboard</a>
-                            {{-- @endcan --}}
+                            @endcan
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
                                 <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700"
@@ -140,10 +140,6 @@
             <a href="#"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                 Inicio</a>
-
-            {{-- <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-            </a> --}}
         </div>
     </div>
 </nav>

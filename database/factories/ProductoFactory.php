@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Producto;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Producto>
  */
@@ -28,7 +29,6 @@ class ProductoFactory extends Factory
             'tamaño' => $this->faker->randomElement(['42x25', '25x25']),
             // 'color' => $this->faker->safeColorName(),
             'stock' => rand(3, 5),
-
         ];
     }
 }

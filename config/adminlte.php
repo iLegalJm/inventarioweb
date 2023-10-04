@@ -318,7 +318,7 @@ return [
             // 'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'ADMINISTRADOR'],
+        ['header' => 'ADMINISTRACIÓN'],
         [
             'text' => 'Perfil',
             'url' => 'admin/settings',
@@ -336,10 +336,13 @@ return [
                 [
                     'text' => 'Usuarios',
                     'route' => 'admin.users.index',
+                    'icon' => 'fa fa-fw fa-users',
+                    'can' => 'admin.users.index'
                 ],
                 [
-                    'text' => 'Roles',
-                    'url' => '#',
+                    'text' => 'Lista de roles',
+                    'route' => 'admin.roles.index',
+                    'icon' => 'fa fa-fw fa-users-cog',
                 ],
                 [
                     'text' => 'Permisos',
@@ -372,14 +375,19 @@ return [
                 [
                     'text' => 'Productos',
                     'route' => 'admin.productos.index',
+                    'icon' => 'fa fab fa-fw fa-brands fa-product-hunt',
                 ],
                 [
                     'text' => 'Ingreso',
                     'route' => 'admin.ingresos.index',
+                    'icon' => 'fa fa-fw fa-plus',
+                    'can' => 'admin.ingresos.index'
                 ],
                 [
                     'text' => 'Salidas',
                     'url' => '#',
+                    'icon' => 'fa fa-fw fa-minus',
+                    'can' => 'admin.ingresos.index'
                 ],
             ],
         ],
@@ -558,5 +566,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

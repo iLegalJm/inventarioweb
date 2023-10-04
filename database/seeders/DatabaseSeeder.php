@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
         en el directorio de almacenamiento de la aplicación. Normalmente se utiliza para crear un
         directorio para almacenar archivos u otros recursos relacionados con la aplicación. */
         Storage::makeDirectory('productos');
+
+        $this->call(RoleSeeder::class);
+
         $this->call(UserSeeder::class);
         $this->call(AlmacenSeeder::class);
         $this->call(ProductoSeeder::class);
-
-        Producto::factory(10)->create();
     }
 }

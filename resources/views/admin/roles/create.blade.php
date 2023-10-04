@@ -3,54 +3,42 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Asignar un rol</h1>
+    <h1>Crear nuevo rol</h1>
 @stop
 
 @section('content')
-
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{ session('info') }}</strong>
-        </div>
-    @endif
-
     <div class="card">
         <div class="card-body">
-            <p class="h5">Nombre:</p>
-            <p class="form-control">{{ $user->name }}</p>
+            {!! Form::open(['route' => 'admin.roles.store']) !!}
 
-            <h2 class="h5">Listado de roles</h2>
-            {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
-            @foreach ($roles as $role)
+            <div class="form-group">
+                {!! Form::label('name', 'Nombre', ['class' => '']) !!}
+                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del almacén']) !!}
+
+                @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <h2 class="h3">Lista de permisos</h2>
+
+            @foreach ($permissions as $permission)
                 <div>
-                    <label for="">
-                        {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
-                        {{$role->name}}
+                    <label>
+                        {!! Form::checkbox('permissions[]', $permission->id, null, ['class' => 'mr-1']) !!}
+                        {{ $permission->description }}
                     </label>
                 </div>
             @endforeach
-                <a href="{{ route('admin.users.index') }}" class="btn btn-dark mt-2">Volver</a>
-            {!! Form::submit('Asignar rol', ['class' => 'btn btn-primary mt-2']) !!}
+
+            {!! Form::submit('Crear rol', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>
-
 @stop
 
 @section('css')
-    <style>
-        .image-wraper {
-            position: relative;
-            padding-bottom: 53.25%;
-        }
-
-        .image-wrapper img {
-            /* position: absolute; */
-            object-fit: cover;
-            max-width: 400px;
-            max-height: 200px;
-        }
-    </style>
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
@@ -88,18 +76,5 @@
             }
             formGroupImagen.removeChild(inputs[inputs.length - 1]);
         });
-
-        //Cambiar imagen
-        document.getElementById("imagen").addEventListener('change', cambiarImagen);
-
-        function cambiarImagen(event) {
-            var file = event.target.files[0];
-
-            var reader = new FileReader();
-            reader.onload = event => {
-                document.querySelector('#picture').setAttribute('src', event.target.result);
-            }
-            reader.readAsDataURL(file);
-        }
     </script>
 @stop

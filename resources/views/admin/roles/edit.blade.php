@@ -16,20 +16,26 @@
 
     <div class="card">
         <div class="card-body">
-            <p class="h5">Nombre:</p>
-            <p class="form-control">{{ $user->name }}</p>
+            {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'put']) !!}
+            <div class="form-group">
+                {!! Form::label('name', 'Nombre', ['class' => '']) !!}
+                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del almacén']) !!}
+                @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <h2 class="h5">Listado de roles</h2>
-            {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
-            @foreach ($roles as $role)
+            <h2 class="h3">Lista de permisos</h2>
+
+            @foreach ($permissions as $permission)
                 <div>
-                    <label for="">
-                        {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
-                        {{$role->name}}
+                    <label>
+                        {!! Form::checkbox('permissions[]', $permission->id, null, ['class' => 'mr-1']) !!}
+                        {{ $permission->description }}
                     </label>
                 </div>
             @endforeach
-                <a href="{{ route('admin.users.index') }}" class="btn btn-dark mt-2">Volver</a>
+            <a href="{{ route('admin.users.index') }}" class="btn btn-dark mt-2">Volver</a>
             {!! Form::submit('Asignar rol', ['class' => 'btn btn-primary mt-2']) !!}
             {!! Form::close() !!}
         </div>
