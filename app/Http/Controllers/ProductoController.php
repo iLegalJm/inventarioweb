@@ -24,6 +24,11 @@ class ProductoController extends Controller
         return view('productos.index');
     }
 
+    public function addToCarrito(Producto $id)
+    {
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */

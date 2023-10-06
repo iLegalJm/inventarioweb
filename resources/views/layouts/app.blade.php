@@ -23,7 +23,7 @@
     <x-banner />
 
     {{-- dark:bg-gray-900 --}}
-    <div class="min-h-screen bg-gray-100 ">
+    <div class="min-h-screen bg-gray-900 ">
         @livewire('navigation')
 
         <!-- Page Heading -->
@@ -36,7 +36,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main >
             {{ $slot }}
         </main>
     </div>

@@ -17,6 +17,7 @@ class CreateDetalleproductosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('producto_id');
             $table->unsignedBigInteger('almacen_id');
+            $table->unsignedBigInteger('categoria_id');
             $table->integer('cantidad')->nullable();
             $table->double('precio_unit_sigv', 11, 2)->nullable();
             $table->double('precio_unit_igv', 11, 2)->nullable();
@@ -27,6 +28,7 @@ class CreateDetalleproductosTable extends Migration
 
             $table->foreign('almacen_id', 'fk_detalleproductos_almacenes1')->references('id')->on('almacenes');
             $table->foreign('producto_id', 'fk_detalleproductos_productos1')->references('id')->on('productos');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
         });
     }
 

@@ -1,5 +1,8 @@
 <div>
+    <x-input placeholder="Buscar por nombre" class="w-full" wire:model="search"></x-input>
+
     <div class="container grid bg-gray-800 lg:grid-cols-3 justify-center gap-5">
+
         @foreach ($productos as $producto)
             <div
                 class="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md">

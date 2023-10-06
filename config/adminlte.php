@@ -330,6 +330,11 @@ return [
             'icon' => 'fas fa-solid fa-store',
         ],
         [
+            'text' => 'Categorias',
+            'route' => 'admin.categorias.index',
+            'icon' => 'fas fa fa-list-alt',
+        ],
+        [
             'text' => 'Seguridad',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
