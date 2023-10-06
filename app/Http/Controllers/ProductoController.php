@@ -13,7 +13,6 @@ class ProductoController extends Controller
     public function index()
     {
         // $productos = Producto::where('marca', 'asus')->paginate(10);
-        $productos = Producto::all();
         // foreach ($productos as $producto) {
         //     if () {
         //         echo $producto->productofoto;
@@ -22,7 +21,7 @@ class ProductoController extends Controller
 
         // }
 
-        return view('productos.index', compact('productos'));
+        return view('productos.index');
     }
 
     /**
