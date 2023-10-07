@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductoController;
 Route::controller(ProductoController::class)->group(function () {
     Route::get('/', 'index')->name('productos.index');
     Route::get('productos/{producto}', 'show')->name('productos.show');
+    Route::get('carrito', 'carrito')->name('productos.carrito');
     // Route::get()
 });
 

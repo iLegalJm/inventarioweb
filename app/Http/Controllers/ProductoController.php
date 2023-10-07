@@ -24,9 +24,10 @@ class ProductoController extends Controller
         return view('productos.index');
     }
 
-    public function addToCarrito(Producto $id)
+    public function carrito()
     {
-
+        // echo "dsa";
+        return view('productos.carrito');
     }
 
     /**
@@ -50,6 +51,29 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
+        // $cartItem = \Cart::add(
+        //     array(
+        //         'id' => $producto->id,
+        //         'name' => $producto->nombre,
+        //         'price' => $producto->precioventa,
+        //         'qty' => 4,
+        //         'options' => array(),
+        //     )
+        // );
+
+        // Cart::associate($cartItem->rowId, 'Producto');
+
+        // $cartItem->associate('Producto');
+
+        // \Cart::add(
+        //     array(
+        //         'id' => $producto->id,
+        //         'name' => $producto->nombre,
+        //         'price' => $producto->precioventa,
+        //         'qty' => 4,
+        //         'options' => array(),
+        //     )
+        // );
         return view('productos.show', compact('producto'));
     }
 
