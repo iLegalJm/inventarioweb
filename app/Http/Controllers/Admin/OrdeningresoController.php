@@ -41,9 +41,10 @@ class OrdeningresoController extends Controller
             1 => 'Pendiente',
             2 => 'Realizado'
         ];
-        $productos = Producto::all()->where('stock', '>', 0)->pluck('nombre', 'id');
+        $codigo = $this->generarCodigo();
+        $productos = Producto::all()->pluck('nombre', 'id');
         $almacenes = Almacen::all()->pluck('nombre', 'id');
-        return view('admin.ingresos.create', compact('idestados', 'productos', 'almacenes'));
+        return view('admin.ingresos.create', compact('idestados', 'productos', 'almacenes', 'codigo'));
     }
 
     /**
@@ -139,5 +140,26 @@ class OrdeningresoController extends Controller
     public function destroy(Ordeningresosalida $ingreso)
     {
         //
+    }
+
+    function generarCodigo()
+    {
+        // Crea un conjunto de caracteres que se pueden usar para generar el código
+        $caracteres = '0123456789';
+
+        // Crea una cadena vacía para almacenar el código
+        $codigo = '';
+
+        // Genera 12 números aleatorios
+        for ($i = 0; $i < 16; $i++) {
+            // Genera un número aleatorio entre 0 y el número de caracteres
+            $numero = rand(0, strlen($caracteres) - 1);
+
+            // Agrega el número aleatorio al código
+            $codigo .= $caracteres[$numero];
+        }
+
+        $cod = (!empty(Ordeningresosalida::where('codigo', '=', $codigo)->first())) ? $this->generarCodigo() : $codigo;
+        return $cod;
     }
 }

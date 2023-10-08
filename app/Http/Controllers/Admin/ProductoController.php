@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Almacen;
+use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('admin.productos.create');
+        $codigo = $this->generarCodigo();
+        $categorias = Categoria::all()->pluck('nombre', 'id');
+        return view('admin.productos.create', compact('categorias', 'codigo'));
     }
 
     /**
@@ -96,5 +99,26 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
+    }
+
+    function generarCodigo()
+    {
+        // Crea un conjunto de caracteres que se pueden usar para generar el código
+        $caracteres = '0123456789';
+
+        // Crea una cadena vacía para almacenar el código
+        $codigo = '';
+
+        // Genera 12 números aleatorios
+        for ($i = 0; $i < 15; $i++) {
+            // Genera un número aleatorio entre 0 y el número de caracteres
+            $numero = rand(0, strlen($caracteres) - 1);
+
+            // Agrega el número aleatorio al código
+            $codigo .= $caracteres[$numero];
+        }
+
+        $cod = (!empty(Producto::where('codigo', '=', $codigo)->first())) ? $this->generarCodigo() : $codigo;
+        return $cod;
     }
 }

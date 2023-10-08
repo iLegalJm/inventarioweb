@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('inventarioalmacenes', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fechamovimiento');
+            $table->timestamp('fechamovimiento')->nullable()->useCurrent();
             $table->integer('cantidadinicial')->nullable();
             $table->integer('cantidadingreso')->nullable();
             $table->integer('cantidadsalida')->nullable();

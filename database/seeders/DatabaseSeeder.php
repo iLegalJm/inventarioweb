@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('productos');
 
         $this->call(RoleSeeder::class);
-
+        $this->call(CategoriaSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(AlmacenSeeder::class);
         $this->call(ProductoSeeder::class);

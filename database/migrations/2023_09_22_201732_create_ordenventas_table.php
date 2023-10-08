@@ -21,7 +21,7 @@ class CreateOrdenventasTable extends Migration
             $table->string('idtipopago', 45)->nullable();
             $table->integer('idestado')->nullable();
             $table->double('subtotal', 11, 2)->nullable();
-            $table->double('impuestovta', 4, 2)->nullable();
+            $table->double('impuestovta', 11, 2)->nullable();
             $table->double('total', 11, 2)->nullable();
             $table->double('totaldscto', 11, 2)->nullable();
             $table->string('descripcion')->nullable();

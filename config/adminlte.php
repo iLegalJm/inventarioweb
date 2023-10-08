@@ -349,10 +349,10 @@ return [
                     'route' => 'admin.roles.index',
                     'icon' => 'fa fa-fw fa-users-cog',
                 ],
-                [
-                    'text' => 'Permisos',
-                    'url' => '#',
-                ],
+                // [
+                //     'text' => 'Permisos',
+                //     'url' => '#',
+                // ],
             ],
         ],
         [
@@ -365,11 +365,13 @@ return [
                 // ],
                 [
                     'text' => 'Pedidos',
-                    'url' => '#',
+                    'route' => 'admin.ordenpedidos.index',
+                    'icon' => 'fa fab fa-fw fa-brands fa-product-hunt',
                 ],
                 [
                     'text' => 'Ventas',
-                    'url' => '#',
+                    'route' => 'admin.ordenventas.index',
+                    'icon' => 'fa fab fa-fw fa-brands fa-product-hunt',
                 ],
             ],
         ],
@@ -390,9 +392,9 @@ return [
                 ],
                 [
                     'text' => 'Salidas',
-                    'url' => '#',
+                    'route' => 'admin.salidas.index',
                     'icon' => 'fa fa-fw fa-minus',
-                    'can' => 'admin.ingresos.index'
+                    // 'can' => 'admin.ingresos.index'
                 ],
             ],
         ],

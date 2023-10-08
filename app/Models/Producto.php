@@ -14,7 +14,7 @@ class Producto extends Model
     //     return "nombre";
     // }
 
-    protected $fillable = ['codigo', 'precioventa', 'nombre', 'descripcion', 'marca', 'modelo', 'tamaño', 'stock'];
+    protected $fillable = ['codigo', 'precioventa', 'nombre', 'descripcion', 'marca', 'modelo', 'tamaño', 'stock', 'categoria_id'];
 
     /* La línea `public  = false;` deshabilita la funcionalidad de marca de tiempo
     automática en el modelo Eloquent. De forma predeterminada, Eloquent espera que las columnas
