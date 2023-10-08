@@ -9,6 +9,8 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    protected $fillable = ['nombres', 'apellidos', 'numerodocumento', 'telefono'];
     public function ordenpedido()
     {
         return $this->hasMany(Ordenpedido::class);

@@ -14,7 +14,7 @@ class CreateDetallepedidosTable extends Migration
     public function up()
     {
         Schema::create('detallepedidos', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->id();
             $table->string('ordenpedido_id', 12);
             $table->unsignedBigInteger('producto_id');
             $table->integer('cantidad');

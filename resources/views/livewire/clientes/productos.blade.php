@@ -2,9 +2,6 @@
     <div class="text-white">
 
     </div>
-    <div class="text-white">
-        {{ Cart::total() }}
-    </div>
     <x-input placeholder="Buscar por nombre" class="w-full" wire:model="search"></x-input>
 
     <div class="container grid bg-gray-800 lg:grid-cols-3 justify-center gap-5">

@@ -20,16 +20,17 @@ class ProductoController extends Controller
         //     }
 
         // }
-
         return view('productos.index');
     }
 
     public function carrito()
     {
-        // echo "dsa";
         return view('productos.carrito');
     }
 
+    public function checkout(){
+        return view('productos.checkout');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -74,6 +75,7 @@ class ProductoController extends Controller
         //         'options' => array(),
         //     )
         // );
+        // return \Cart::update('027c91341fd5cf4d2579b49c4b6a90da', 2);
         return view('productos.show', compact('producto'));
     }
 

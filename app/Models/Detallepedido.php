@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Detallepedido extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
+    protected $fillable = ['ordenpedido_id', 'producto_id', 'cantidad', 'precio', 'valor_vta'];
     public function producto()
     {
         return $this->belongsTo(Producto::class);

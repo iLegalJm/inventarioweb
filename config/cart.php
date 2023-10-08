@@ -64,4 +64,7 @@ return [
 
     ],
 
+    'storage' => [
+        'driver' => 'session',
+    ],
 ];

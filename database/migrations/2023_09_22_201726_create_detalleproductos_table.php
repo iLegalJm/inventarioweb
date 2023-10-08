@@ -13,6 +13,12 @@ class CreateDetalleproductosTable extends Migration
      */
     public function up()
     {
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre', 50);
+            $table->string('descripcion')->nullable();
+        });
+
         Schema::create('detalleproductos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('producto_id');
@@ -39,6 +45,7 @@ class CreateDetalleproductosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('categorias');
         Schema::dropIfExists('detalleproductos');
     }
 }
