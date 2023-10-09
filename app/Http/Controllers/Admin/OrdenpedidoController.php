@@ -143,11 +143,12 @@ class OrdenpedidoController extends Controller
 
         //! /*----------  Detalles de la tabla  ----------*/
         foreach ($detallepedido as $detalle) {
-            $pdf->MultiCell(0, 4, $this->decodificarPdf($detalle->producto->nombre), 0, 'C', false);
+            $pdf->MultiCell(0, 4, $this->decodificarPdf(substr($detalle->producto->nombre, 0, 9)), 0, 'C', false);
             $pdf->Cell(10, 4, $this->decodificarPdf($detalle->cantidad), 0, 0, 'C');
             $pdf->Cell(19, 4, $this->decodificarPdf("S/. " . $detalle->precio), 0, 0, 'C');
             $pdf->Cell(19, 4, $this->decodificarPdf("S/. 0.00"), 0, 0, 'C');
             $pdf->Cell(28, 4, $this->decodificarPdf("S/. " . $detalle->valor_vta), 0, 0, 'C');
+            $pdf->Ln(5);
         }
         $pdf->Ln(5);
         $pdf->MultiCell(0, 4, $this->decodificarPdf("Garantía de fábrica: 1 año"), 0, 'C', false);

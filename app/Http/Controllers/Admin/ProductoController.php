@@ -40,7 +40,7 @@ class ProductoController extends Controller
 
         if ($request->file('imagen')) {
             foreach ($request->file('imagen') as $imagen) {
-                $url = Storage::put('productos', $imagen);
+                $url = Storage::put('public/productos', $imagen);
                 $producto->productofoto()->create([
                     'url' => $url
                 ]);
