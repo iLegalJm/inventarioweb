@@ -8,14 +8,70 @@ use App\Models\Ordenventa;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Milon\Barcode\DNS1D;
+use Milon\Barcode\DNS2D;
 
 class OrdenventaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index()
+    {
+        $ordenventas = Ordenventa::all();
+        return view('admin.ventas.index', compact('ordenventas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+
+    public function pdf()
     {
         $pdf = new Fpdf('P', 'mm', array(80, 258));
         $pdf->SetMargins(4, 10, 4);
@@ -26,10 +82,10 @@ class OrdenventaController extends Controller
         $pdf->SetTextColor(0, 0, 0);
         $pdf->MultiCell(0, 5, strtoupper($this->decodificarPdf("MazterStore")), 0, 'C', false);
         $pdf->SetFont('Arial', '', 9);
-        $pdf->MultiCell(0, 5, $this->decodificarPdf("RUC: 0000000000"), 0, 'C', false);
+        $pdf->MultiCell(0, 5, $this->decodificarPdf("RUC: 20610752005"), 0, 'C', false);
         $pdf->MultiCell(0, 5, $this->decodificarPdf("Direccion Santa Clara, Ate Vitarte"), 0, 'C', false);
         $pdf->MultiCell(0, 5, $this->decodificarPdf("Teléfono: +51 946-561-445"), 0, 'C', false);
-        $pdf->MultiCell(0, 5, $this->decodificarPdf("Email: mazterstore@mazterstore.com"), 0, 'C', false);
+        $pdf->MultiCell(0, 5, $this->decodificarPdf("Email: Ventas@mazterstore.com"), 0, 'C', false);
 
         $pdf->Ln(1);
         $pdf->Cell(0, 5, $this->decodificarPdf("------------------------------------------------------"), 0, 0, 'C');
@@ -124,70 +180,21 @@ class OrdenventaController extends Controller
         $pdf->Cell(0, 7, $this->decodificarPdf("Gracias por su compra"), '', 0, 'C');
 
         $pdf->Ln(9);
-
+        // data:image/png;base64,
         # Codigo de barras #
-        // $pdf->Code128(5, $pdf->GetY(), "COD000001V0001", 70, 20);
+        // $barcode = DNS1D::getBarcodePNG('4', 'C39+',3,33);
+        // $pdf->MultiCell(70, 20, DNS1D::getBarcodeSVG('4445645656', 'PHARMA2T'), 1, 'C');
+        $barcode = DNS1D::getBarcodePNGPath('4445645656', 'CODE11', 70, 20);
+        $pdf->Image($barcode, 5, $pdf->GetY(), 70, 20);
         $pdf->SetXY(0, $pdf->GetY() + 21);
         $pdf->SetFont('Arial', '', 14);
         $pdf->MultiCell(0, 5, $this->decodificarPdf("COD000001V0001"), 0, 'C', false);
 
         $pdf->Output("I", "Ticket_Nro_1.pdf", true);
         exit;
-        // $ordenventas = Ordenventa::all();
-        // return view('admin.ventas.index', compact('ordenventas'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
     public function decodificarPdf($string)
     {
         return mb_convert_encoding($string, "ISO-8859-1", "UTF-8");
     }
-
 }
