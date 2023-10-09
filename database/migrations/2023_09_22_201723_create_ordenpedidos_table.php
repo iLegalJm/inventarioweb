@@ -14,7 +14,6 @@ class CreateOrdenpedidosTable extends Migration
     public function up()
     {
         Schema::create('ordenpedidos', function (Blueprint $table) {
-            $table->integer('id')->nullable();
             $table->string('codigo', 12)->primary();
             $table->timestamp('fecha')->nullable()->useCurrent();
             $table->unsignedBigInteger('cliente_id');

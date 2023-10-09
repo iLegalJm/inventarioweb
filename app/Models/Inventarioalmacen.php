@@ -10,6 +10,5 @@ class Inventarioalmacen extends Model
     use HasFactory;
     protected $table = 'inventarioalmacenes';
     public $timestamps = false;
-    protected $fillable = ['fechamovimiento', 'cantidadinicial', 'cantidadingreso', 'cantidadingreso', 'stock', 'producto_id', 'almacen_id'];
-
+    protected $fillable = ['fechamovimiento', 'cantidadinicial', 'cantidadingreso', 'cantidadsalida', 'stock', 'costo', 'producto_id', 'almacen_id'];
 }

@@ -17,7 +17,8 @@
                 </div> --}}
                 <div class="col">
                     {!! Form::label('codigo', 'Codigo:', ['class' => '']) !!}
-                    {!! Form::text('codigo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el codigo producto']) !!}
+                    {!! Form::text('codigo', $codigo, ['class' => 'form-control', 'placeholder' => 'Ingrese el codigo producto',
+                    'readonly' => true]) !!}
                 </div>
             </div>
             <div class="form-row">
@@ -53,13 +54,10 @@
                     {!! Form::label('tamaño', 'Tamaño:', ['class' => '']) !!}
                     {!! Form::text('tamaño', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el tamaño del producto']) !!}
                 </div>
-                {{-- <div class="col">
-                    {!! Form::label('color', 'Color:', ['class' => '']) !!}
-                    {!! Form::text('color', null, [
-                        'class' => 'form-control',
-                        'placeholder' => 'Ingrese el color del producto',
-                    ]) !!}
-                </div> --}}
+                <div class="col">
+                    {!! Form::label('categoria_id', 'Categoría:', ['class' => '']) !!}
+                    {!! Form::select('categoria_id', $categorias, null, ['class' => 'form-control']) !!}
+                </div>
             </div>
             <div class="form-row">
                 <div class="col-6">

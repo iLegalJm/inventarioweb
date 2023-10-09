@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Ordenpedido extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['codigo', 'fecha', 'cliente_id', 'idestado', 'total', 'descripcion', 'idtipodepago', 'user_id'];
 
     public function ordenventa()
     {

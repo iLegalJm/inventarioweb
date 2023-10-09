@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\OrdenpedidoController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductoController;
@@ -10,7 +11,14 @@ use App\Http\Controllers\ProductoController;
 Route::controller(ProductoController::class)->group(function () {
     Route::get('/', 'index')->name('productos.index');
     Route::get('productos/{producto}', 'show')->name('productos.show');
+    Route::get('carrito', 'carrito')->name('productos.carrito');
+    Route::get('checkout', 'checkout')->middleware('auth')->name('productos.checkout');
     // Route::get()
+});
+
+Route::controller(OrdenpedidoController::class)->group(function () {
+    Route::post('ordenpedidos', 'store')->name('ordenpedidos.store');
+    Route::get('ordenpedidos', 'storeonline')->name('ordenpedidos.storeonline');
 });
 
 /* El bloque de código define un grupo de rutas que está protegido por middleware. El middleware

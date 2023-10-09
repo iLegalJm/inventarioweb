@@ -15,10 +15,14 @@
             <div class="form-row m-1">
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                     {!! Form::label('codigo', 'Codigo:', ['class' => '']) !!}
-                    {!! Form::text('codigo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el codigo de ingreso']) !!}
+                    {!! Form::text('codigo', $codigo, [
+                        'class' => 'form-control',
+                        'placeholder' => 'Ingrese el codigo de ingreso',
+                        'readonly' => true
+                    ]) !!}
                     @error('codigo')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                     {!! Form::label('idestado', 'Estado:', ['class' => '']) !!}
