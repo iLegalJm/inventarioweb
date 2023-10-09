@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container p-5">
-        <form method="POST" autocomplete="off" action="{{ route('ordenpedidos.store') }}">
+        <form id="formulario_cliente" method="POST" autocomplete="off" action="{{ route('ordenpedidos.store') }}">
             @csrf
             <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="relative z-0 w-full mb-6 group">
@@ -37,6 +37,53 @@
             </div>
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ordenar</button>
+
+            <button id="boton_mercadopago" type="button" class="cho-container"></button>
         </form>
+
     </div>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        const mp = new MercadoPago("{{ config('services.mercadopago.key') }}", {
+            locale: 'es-AR'
+        });
+
+        mp.checkout({
+            preference: {
+                id: '{{ $preference->id }}'
+            },
+            render: {
+                container: '.cho-container',
+                label: 'Pagar online'
+            }
+        });
+
+        $(document).ready(function() {
+            // Get the checkout button
+            const checkoutButton = $('.cho-container');
+
+            // Get the submit button
+            const submitButton = $('button[type="submit"]');
+
+            // Attach an event listener to the checkout button
+            checkoutButton.click(function() {
+                // Prevent the form from being submitted
+                event.preventDefault();
+
+                // Process the payment
+                // Once the payment is successful, enable the submit button
+                // For example, you can use MercadoPago to process the payment
+                // Once the payment is successful, you can use the following code to enable the submit button
+                submitButton.removeAttr('disabled');
+            });
+
+            // Attach an event listener to the submit button
+            submitButton.click(function() {
+                // Submit the form
+                $('form').submit();
+            });
+        })
+    </script>
 </x-app-layout>

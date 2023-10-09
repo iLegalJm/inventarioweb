@@ -13,6 +13,7 @@ use Milon\Barcode\DNS1D;
 use Milon\Barcode\DNS2D;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
+
 class OrdenpedidoController extends Controller
 {
     /**

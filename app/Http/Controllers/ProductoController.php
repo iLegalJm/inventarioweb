@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use MercadoPago\Item;
+use MercadoPago\Preference;
+use MercadoPago\SDK;
 
 class ProductoController extends Controller
 {
@@ -28,8 +31,38 @@ class ProductoController extends Controller
         return view('productos.carrito');
     }
 
-    public function checkout(){
-        return view('productos.checkout');
+    public function checkout()
+    {
+        SDK::setAccessToken(config('services.mercadopago.token'));
+
+        if (\Cart::content() != []) {
+            $preference = new Preference();
+
+            $cart_items = \Cart::content();
+
+            foreach ($cart_items as $items) {
+                $item = new Item();
+                $item->title = 'Producto';
+                $item->quantity = $items->qty;
+                $item->unit_price = $items->price;
+
+                $products[] = $item;
+            }
+
+            $preference->back_urls = array(
+                'success' => route('ordenpedidos.storeonline'),
+                'failure' => 'https://www.tu-sitio/success',
+                'pending' => 'https://www.tu-sitio/success',
+            );
+
+            $preference->auto_return = "approved";
+
+            $preference->items = $products;
+            $preference->save();
+        } else {
+            $preference = new Preference();
+        }
+        return view('productos.checkout', compact('preference'));
     }
     /**
      * Show the form for creating a new resource.

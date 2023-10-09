@@ -16,8 +16,9 @@ Route::controller(ProductoController::class)->group(function () {
     // Route::get()
 });
 
-Route::controller(OrdenpedidoController::class)->group(function (){
+Route::controller(OrdenpedidoController::class)->group(function () {
     Route::post('ordenpedidos', 'store')->name('ordenpedidos.store');
+    Route::get('ordenpedidos', 'storeonline')->name('ordenpedidos.storeonline');
 });
 
 /* El bloque de código define un grupo de rutas que está protegido por middleware. El middleware
