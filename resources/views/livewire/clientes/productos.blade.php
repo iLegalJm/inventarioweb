@@ -12,7 +12,7 @@
                 <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
                     href="{{ route('productos.show', [$producto]) }}">
                     <img class="peer absolute top-0 right-0 h-full w-full object-cover"
-                        src="@if($producto->productofoto->toArray() != null){{Storage::url($producto->productofoto[0]->url)}}@else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"
+                        src="@if ($producto->productofoto->toArray() != null) {{ Storage::url($producto->productofoto[0]->url) }}@else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"
                         alt="product image" />
                     <img class="peer peer-hover:right-0 absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0"
                         src="@if ($producto->productofoto->toArray() != null) {{ Storage::url($producto->productofoto[0]->url) }} @else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"

@@ -33,7 +33,8 @@ class OrdensalidaController extends Controller
     {
         $codigo = $this->generarCodigo();
         $almacenes = Almacen::all()->pluck('nombre', 'id');
-        $ordenventas = Ordenventa::all()->pluck('codigo', 'codigo');
+        $ordenventas = Ordenventa::all()->where('idestado', '=', 1)->pluck('codigo', 'codigo');
+        // Ordenpedido::where('codigo', '=', $codigo)->update(['idestado' => 2]);
         return view('admin.salidas.create', compact('codigo', 'almacenes', 'ordenventas'));
     }
 

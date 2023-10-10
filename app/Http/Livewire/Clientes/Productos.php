@@ -13,6 +13,7 @@ class Productos extends Component
     public $search;
     public function render()
     {
+        // $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
         $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
         return view('livewire.clientes.productos', compact('productos'));
     }

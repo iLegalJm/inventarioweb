@@ -23,6 +23,7 @@ class ProductoController extends Controller
         //     }
 
         // }
+        // $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
         return view('productos.index');
     }
 
