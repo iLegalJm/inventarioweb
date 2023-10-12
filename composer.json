@@ -18,6 +18,7 @@
         "mercadopago/dx-php": "^2.6",
         "milon/barcode": "^10.0",
         "mindscms/laravelshoppingcart": "^2.1",
+        "spatie/laravel-html": "^3.2",
         "spatie/laravel-permission": "^5.11"
     },
     "require-dev": {

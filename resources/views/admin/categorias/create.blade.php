@@ -9,19 +9,19 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.categorias.store']) !!}
+            {{ html()->form('POST')->route('admin.categorias.store')->open() }}
 
             <div class="form-group">
-                {!! Form::label('nombre', 'Nombre', ['class' => '']) !!}
-                {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la categoria']) !!}
+                {{ html()->label('Nombre: ')->for('nombre') }}
+                {{ html()->input('text')->name('nombre')->class('form-control')->placeholder('Nombre de categoría') }}
 
                 @error('nombre')
-                    <span class="text-danger">{{ $message }}</span>
+                    {{ html()->span($message)->class('text-danger') }}
                 @enderror
             </div>
 
-            {!! Form::submit('Crear categoría', ['class' => 'btn btn-primary']) !!}
-            {!! Form::close() !!}
+            {{ html()->submit('Create categoría')->class('btn btn-primary') }}
+            {{ html()->form()->close() }}
         </div>
     </div>
 @stop
