@@ -317,22 +317,25 @@ return [
             'icon' => 'far fa-fw fa-file',
             // 'label' => 4,
             'label_color' => 'success',
+            'can' => 'admin.users.index'
         ],
         ['header' => 'ADMINISTRACIÓN'],
-        [
-            'text' => 'Perfil',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        // [
+        //     'text' => 'Perfil',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
         [
             'text' => 'Configuracion',
             'route' => 'admin.almacenes.index',
             'icon' => 'fas fa-solid fa-store',
+            'can' => 'admin.users.index'
         ],
         [
             'text' => 'Categorias',
             'route' => 'admin.categorias.index',
             'icon' => 'fas fa fa-list-alt',
+            'can' => 'admin.users.index'
         ],
         [
             'text' => 'Seguridad',
@@ -348,11 +351,8 @@ return [
                     'text' => 'Lista de roles',
                     'route' => 'admin.roles.index',
                     'icon' => 'fa fa-fw fa-users-cog',
+                    'can' => 'admin.users.index'
                 ],
-                // [
-                //     'text' => 'Permisos',
-                //     'url' => '#',
-                // ],
             ],
         ],
         [
@@ -367,11 +367,13 @@ return [
                     'text' => 'Pedidos',
                     'route' => 'admin.ordenpedidos.index',
                     'icon' => 'fa fab fa-fw fa-brands fa-product-hunt',
+                    'can' => 'admin.ordenpedidos.index'
                 ],
                 [
                     'text' => 'Ventas',
                     'route' => 'admin.ordenventas.index',
                     'icon' => 'fa fab fa-fw fa-brands fa-product-hunt',
+                    'can' => 'admin.ordenventas.index'
                 ],
             ],
         ],
@@ -394,7 +396,7 @@ return [
                     'text' => 'Salidas',
                     'route' => 'admin.salidas.index',
                     'icon' => 'fa fa-fw fa-minus',
-                    // 'can' => 'admin.ingresos.index'
+                    'can' => 'admin.salidas.index'
                 ],
             ],
         ],

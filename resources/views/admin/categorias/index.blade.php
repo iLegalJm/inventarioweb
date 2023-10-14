@@ -38,10 +38,10 @@
                         <tr>
                             <td>{{ $categoria->id }}</td>
                             <td>{{ $categoria->nombre }}</td>
-                            <td width="10px"><a href="{{ route('admin.almacenes.edit', $categoria) }}"
+                            <td width="10px"><a href="{{ route('admin.categorias.edit', $categoria) }}"
                                     class="btn btn-primary btn-sm">Editar</a></td>
                             <td width="10px">
-                                <form action="{{ route('admin.almacenes.destroy', $categoria) }}" method="post">
+                                <form action="{{ route('admin.categorias.destroy', $categoria) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

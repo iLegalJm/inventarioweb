@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use PDOException;
 
 class CategoriaController extends Controller
 {
@@ -51,6 +52,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
+        // return $categoria;
         return view('admin.categorias.edit', compact('categoria'));
     }
 
@@ -67,6 +69,11 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        try {
+            $categoria->delete();
+            return redirect()->route('admin.categorias.index')->with('info', 'La categoria se eliminó correctamente');
+        } catch (PDOException $th) {
+            return redirect()->route('admin.categorias.index')->with('info', "Error al actualizar");
+        }
     }
 }
