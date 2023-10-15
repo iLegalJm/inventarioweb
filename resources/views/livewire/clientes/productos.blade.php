@@ -1,21 +1,19 @@
-<div>
-    <div class="text-white">
-
-    </div>
-    <x-input placeholder="Buscar por nombre" class="w-full" wire:model="search"></x-input>
-
-    <div class="container grid bg-gray-800 lg:grid-cols-3 justify-center gap-5">
-
-        @foreach ($productos as $producto)
+<div class="container mx-auto my-5">
+    <div class="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-items-center items-center gap-5 place-content-center">
+        @foreach ($detalleproductos as $detalleproducto)
+            @php
+                $producto = $detalleproducto->producto;
+                $productofotos = $producto->productofoto;
+            @endphp
             <div
                 class="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md">
                 <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
                     href="{{ route('productos.show', [$producto]) }}">
                     <img class="peer absolute top-0 right-0 h-full w-full object-cover"
-                        src="@if ($producto->productofoto->toArray() != null) {{ Storage::url($producto->productofoto[0]->url) }}@else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"
+                        src="@if (isset($productofotos[0])) {{ Storage::url($productofotos[0]->url) }}@else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"
                         alt="product image" />
                     <img class="peer peer-hover:right-0 absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0"
-                        src="@if ($producto->productofoto->toArray() != null) {{ Storage::url($producto->productofoto[0]->url) }} @else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"
+                        src="@if (isset($productofotos[1])) {{ Storage::url($productofotos[1]->url) }} @else https://upload.wikimedia.org/wikipedia/commons/7/75/Falta_imagen.jpg @endif"
                         alt="product image" />
                     <svg class="group-hover:animate-ping group-hover:opacity-30 peer-hover:opacity-0 pointer-events-none absolute inset-x-0 bottom-5 mx-auto text-3xl text-white transition-opacity"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"

@@ -16,19 +16,19 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($almacene, ['route' => ['admin.almacenes.update', $almacene], 'method' => 'put']) !!}
+            {{ html()->modelForm($almacene, 'PUT')->route('admin.almacenes.update', $almacene)->open() }}
 
             <div class="form-group">
-                {!! Form::label('nombre', 'Nombre', ['class' => '']) !!}
-                {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del almacén']) !!}
-
+                {{ html()->label('Nombre: ')->for('nombre') }}
+                {{ html()->text('nombre')->class('form-control')->placeholder('Nombre del almacén') }}
                 @error('nombre')
-                    <span class="text-danger">{{ $message }}</span>
+                    {{ html()->span($message)->class('text-danger') }}
                 @enderror
             </div>
 
-            {!! Form::submit('Actualizar almacén', ['class' => 'btn btn-primary']) !!}
-            {!! Form::close() !!}
+            <a href="{{ route('admin.almacenes.index') }}" class="btn btn-secondary">Volver</a>
+            {{ html()->submit('Actualizar almacén')->class('btn btn-primary') }}
+            {{ html()->closeModelForm() }}
         </div>
     </div>
 @stop

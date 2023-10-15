@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Clientes;
 
+use App\Models\Detalleproducto;
 use App\Models\Producto;
 use Livewire\Component;
 // use Gloudemans\Shoppingcart\Cart;
@@ -13,9 +14,10 @@ class Productos extends Component
     public $search;
     public function render()
     {
+        $detalleproductos = Detalleproducto::where('cantidad', '>', 0)->get();
         // $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
-        $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
-        return view('livewire.clientes.productos', compact('productos'));
+        // return $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
+        return view('livewire.clientes.productos', compact('detalleproductos'));
     }
 
     public function add_to_cart(Producto $producto)

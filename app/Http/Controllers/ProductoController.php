@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detalleproducto;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use MercadoPago\Item;
@@ -23,8 +24,28 @@ class ProductoController extends Controller
         //     }
 
         // }
-        // $productos = Producto::where('nombre', 'like', '%' . $this->search . '%')->get();
+        // $detalleproductos = Detalleproducto::where('cantidad', '>', 0)->get();
+        // $productos = Producto::whereHas('detalleproducto', function ($query) {
+        //     $query->where('cantidad', '>', 1);
+        // })->get();
         return view('productos.index');
+        // return Detalleproducto::select('detalleproducto.id', '');
+        // foreach ($detalleproductos as $detalleproducto) {
+        //     $producto = $detalleproducto->producto;
+        //     $productofotos = $producto->productofoto;
+        // foreach ($productofotos as $productofoto) {
+        //     echo $productofoto;
+        //     echo "<br>";
+        // }
+        // for ($i = 0; $i < 2; $i++) {
+        //     if (isset($productofotos[$i])) {
+        //         echo $productofotos[$i];
+        //         echo "<br>";
+        //     }
+
+        // }
+        // }
+
     }
 
     public function carrito()
